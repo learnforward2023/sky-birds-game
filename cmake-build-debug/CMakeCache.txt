@@ -205,6 +205,15 @@ CMAKE_STRIP:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
+Sogoku_BINARY_DIR:STATIC=/Users/nguyen.ngoc.hai/Documents/StudyTogether/C++ Programming/sky-birds-game/cmake-build-debug
+
+//Value Computed by CMake
+Sogoku_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Sogoku_SOURCE_DIR:STATIC=/Users/nguyen.ngoc.hai/Documents/StudyTogether/C++ Programming/sky-birds-game
+
+//Value Computed by CMake
 sky_birds_game_BINARY_DIR:STATIC=/Users/nguyen.ngoc.hai/Documents/StudyTogether/C++ Programming/sky-birds-game/cmake-build-debug
 
 //Value Computed by CMake

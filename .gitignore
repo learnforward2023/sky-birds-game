@@ -1,0 +1,12 @@
+# Ignore the main executable file
+cmake-build-debug/sky_birds_game
+
+# Ignore the Testing directory and its contents
+cmake-build-debug/Testing/**
+
+# Ignore specific files
+cmake-build-debug/.ninja_deps
+cmake-build-debug/.ninja_log
+
+# Ignore the directory containing CMake build files
+cmake-build-debug/CMakeFiles/sky_birds_game.dir
