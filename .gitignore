@@ -7,6 +7,8 @@ cmake-build-debug/Testing/**
 # Ignore specific files
 cmake-build-debug/.ninja_deps
 cmake-build-debug/.ninja_log
+cmake-build-debug/build.ninja
+cmake-build-debug/.cmake/**
 
 # Ignore the directory containing CMake build files
 cmake-build-debug/CMakeFiles/sky_birds_game.dir
