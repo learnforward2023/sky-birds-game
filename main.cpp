@@ -1,4 +1,6 @@
 #include <SDL.h>
+#include <SDL_image.h>
+#include <string>
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
@@ -6,6 +8,35 @@ static SDL_Event event;
 const int GAME_SCREEN_WIDTH = 1400;
 const int GAME_SCREEN_HEIGHT = 740;
 const char* GAME_TITLE = "Study Together - Sky Birds Game";
+
+void renderBackground() {
+  // Get the base path for the game application
+  std::string basePath = SDL_GetBasePath();
+  // Append the image to the base path
+  std::string backgroundPath = basePath.append("../images/background.png");
+
+  // Load Background image
+  SDL_Surface* backgroundSurface = IMG_Load(backgroundPath.c_str());
+  if (backgroundSurface == nullptr) {
+    printf("Unable to load image %s! SDL Error: %s\n", backgroundPath.c_str(), SDL_GetError());
+
+    return;
+  }
+
+  // Create texture from surface pixels
+  SDL_Texture* backgroundTexture = SDL_CreateTextureFromSurface(screen, backgroundSurface);
+  if (backgroundTexture == nullptr) {
+    printf("Unable to create texture from %s! SDL Error: %s\n", backgroundPath.c_str(), SDL_GetError());
+
+    return;
+  }
+
+  SDL_FreeSurface(backgroundSurface); // Free the surface after creating the texture
+  SDL_Rect backgroundRect = {0, 0, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT};
+
+  // Render the background
+  SDL_RenderCopy(screen, backgroundTexture, nullptr, &backgroundRect);
+}
 
 int main(int argc, char* args[]) {
   // Initialize SDL
@@ -39,10 +70,10 @@ int main(int argc, char* args[]) {
     }
 
     // Clear the screen
-    SDL_SetRenderDrawColor(screen, 0, 0, 0, 255);
     SDL_RenderClear(screen);
 
     // Draw your game elements here
+    renderBackground();
 
     // Update the screen
     SDL_RenderPresent(screen);

@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD 14)
 add_executable(sky_birds_game main.cpp)
 
 find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+set(SDL2IMAGE_INCLUDE_DIRS /opt/homebrew/include/SDL2)
 
 # Include the directories containing the header files
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${HEADERS} include)
