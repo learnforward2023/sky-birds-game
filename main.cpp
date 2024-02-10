@@ -13,7 +13,7 @@ void renderBackground() {
   // Get the base path for the game application
   std::string basePath = SDL_GetBasePath();
   // Append the image to the base path
-  std::string backgroundPath = basePath.append("../background.png");
+  std::string backgroundPath = basePath.append("../images/background.png");
 
   // Load Background image
   SDL_Surface* backgroundSurface = IMG_Load(backgroundPath.c_str());
