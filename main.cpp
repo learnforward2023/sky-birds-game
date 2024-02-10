@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_image.h>
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
@@ -28,6 +29,25 @@ int main(int argc, char* args[]) {
     return 1;
   }
 
+  // Load Background image
+  SDL_Surface* backgroundSurface = IMG_Load("/Users/StudyTogether/C++ Programming/sky-birds-game/background.png");
+  if (backgroundSurface == nullptr) {
+    printf("Unable to load image %s! SDL Error: %s\n", "../images/background.bmp", SDL_GetError());
+
+    return 1;
+  }
+
+  // Create texture from surface pixels
+  SDL_Texture* backgroundTexture = SDL_CreateTextureFromSurface(screen, backgroundSurface);
+  if (backgroundTexture == nullptr) {
+    printf("Unable to create texture from %s! SDL Error: %s\n", "../images/background.bmp", SDL_GetError());
+
+    return 1;
+  }
+
+  SDL_FreeSurface(backgroundSurface); // Free the surface after creating the texture
+  SDL_Rect backgroundRect = {0, 0, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT};
+
   // Main game loop
   bool quit = false;
   while (!quit) {
@@ -39,10 +59,10 @@ int main(int argc, char* args[]) {
     }
 
     // Clear the screen
-    SDL_SetRenderDrawColor(screen, 0, 0, 0, 255);
     SDL_RenderClear(screen);
 
     // Draw your game elements here
+    SDL_RenderCopy(screen, backgroundTexture, nullptr, &backgroundRect); // Render the background
 
     // Update the screen
     SDL_RenderPresent(screen);
