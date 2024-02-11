@@ -7,37 +7,26 @@ static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
 static SDL_Event event;
 
-Base* loadBackground() {
-  Base* background = new Base();
-  background->LoadTexture("/background/primary.png", screen);
-  SDL_Rect rect = {0, 0, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT};
-  background->SetRect(rect);
+/**
+ * Function declarations
+ */
+Base* loadBackground();
+bool initialize();
+void cleanup();
 
-  return background;
-}
-
+/**
+ * Main function, the entry point of the game - Sky Birds Game with SDL 2 and C++ - Study Together
+ * @param argc The number of arguments
+ * @param args The arguments
+ * @return The exit code
+ */
 int main(int argc, char* args[]) {
-  // Initialize SDL
-  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-    printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-    return 1;
+  if (!initialize()) {
+    printf("Failed to initialize!\n");
+
+    return -1;
   }
 
-  // Create a window
-  window = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-  if (window == nullptr) {
-    printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-    return 1;
-  }
-
-  // Create a screen to render the game
-  screen = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-  if (screen == nullptr) {
-    printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
-    return 1;
-  }
-
-  // Load the background
   Base* background = loadBackground();
 
   // Main game loop
@@ -60,10 +49,60 @@ int main(int argc, char* args[]) {
     SDL_RenderPresent(screen);
   }
 
-  // Cleanup
+  cleanup();
+
+  return 0;
+}
+
+/**
+ * Load the background
+ * @return The background
+ */
+Base* loadBackground() {
+  Base* background = new Base();
+  background->LoadTexture("/background/primary.png", screen);
+  SDL_Rect rect = {0, 0, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT};
+  background->SetRect(rect);
+
+  return background;
+}
+
+/**
+ * Initialize the game
+ * @return true if the game was initialized successfully, false otherwise
+ */
+bool initialize() {
+  // Initialize SDL
+  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+    printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+    return false;
+  }
+
+  // Create a window
+  window = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, GAME_SCREEN_WIDTH,
+                            GAME_SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+  if (window == nullptr) {
+    printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+
+    return false;
+  }
+
+  // Create a screen to render the game
+  screen = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+  if (screen == nullptr) {
+    printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
+
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * Cleanup the game
+ */
+void cleanup() {
   SDL_DestroyRenderer(screen);
   SDL_DestroyWindow(window);
   SDL_Quit();
-
-  return 0;
 }
