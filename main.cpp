@@ -30,7 +30,8 @@ int main(int argc, char* args[]) {
 
   Base* background = loadBackground();
   Player* player = new Player();
-  player->LoadTexture("/player/chicken.png", screen);
+  player->LoadTexture("/player/flying.png", screen);
+  player->SetFrameClip();
 
   // Main game loop
   bool quit = false;
