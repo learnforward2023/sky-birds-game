@@ -16,6 +16,7 @@ class Player : public Base {
 
   public:
     Player();
+    Player(SDL_Renderer *screen);
     ~Player();
 
     void Render(SDL_Renderer* screen);

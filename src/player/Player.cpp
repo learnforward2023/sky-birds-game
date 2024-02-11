@@ -15,6 +15,20 @@ Player::Player() {
 }
 
 /**
+ * Constructor of Player class to initialize the properties of the player and load the texture of the player.
+ * @param SDL_Renderer* screen
+ * @return void
+ */
+Player::Player(SDL_Renderer* screen) {
+  _widthFrame = 0;
+  _heightFrame = 0;
+  _currentFrame = 0;
+
+  LoadTexture("/player/flying.png", screen);
+  SetFrameClip();
+}
+
+/**
  * Destructor of Player class to free the memory of the player after the game is over.
  * @return void
  */
@@ -46,55 +60,12 @@ void Player::SetFrameClip() {
     return;
   }
 
-  _frameClip[0].x = 0;
-  _frameClip[0].y = 0;
-  _frameClip[0].w = _widthFrame;
-  _frameClip[0].h = _heightFrame;
-
-  _frameClip[1].x = _widthFrame;
-  _frameClip[1].y = 0;
-  _frameClip[1].w = _widthFrame;
-  _frameClip[1].h = _heightFrame;
-
-  _frameClip[2].x = 2 * _widthFrame;
-  _frameClip[2].y = 0;
-  _frameClip[2].w = _widthFrame;
-  _frameClip[2].h = _heightFrame;
-
-  _frameClip[3].x = 3 * _widthFrame;
-  _frameClip[3].y = 0;
-  _frameClip[3].w = _widthFrame;
-  _frameClip[3].h = _heightFrame;
-
-  _frameClip[4].x = 4 * _widthFrame;
-  _frameClip[4].y = 0;
-  _frameClip[4].w = _widthFrame;
-  _frameClip[4].h = _heightFrame;
-
-  _frameClip[5].x = 5 * _widthFrame;
-  _frameClip[5].y = 0;
-  _frameClip[5].w = _widthFrame;
-  _frameClip[5].h = _heightFrame;
-
-  _frameClip[6].x = 6 * _widthFrame;
-  _frameClip[6].y = 0;
-  _frameClip[6].w = _widthFrame;
-  _frameClip[6].h = _heightFrame;
-
-  _frameClip[7].x = 7 * _widthFrame;
-  _frameClip[7].y = 0;
-  _frameClip[7].w = _widthFrame;
-  _frameClip[7].h = _heightFrame;
-
-  _frameClip[8].x = 8 * _widthFrame;
-  _frameClip[8].y = 0;
-  _frameClip[8].w = _widthFrame;
-  _frameClip[8].h = _heightFrame;
-
-  _frameClip[9].x = 9 * _widthFrame;
-  _frameClip[9].y = 0;
-  _frameClip[9].w = _widthFrame;
-  _frameClip[9].h = _heightFrame;
+  for (int i = 0; i < 10; i++) {
+    _frameClip[i].x = i * _widthFrame;
+    _frameClip[i].y = 0;
+    _frameClip[i].w = _widthFrame;
+    _frameClip[i].h = _heightFrame;
+  }
 }
 
 /**

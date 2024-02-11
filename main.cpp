@@ -29,9 +29,7 @@ int main(int argc, char* args[]) {
   }
 
   Base* background = loadBackground();
-  Player* player = new Player();
-  player->LoadTexture("/player/flying.png", screen);
-  player->SetFrameClip();
+  Player* player = new Player(screen);
 
   // Main game loop
   bool quit = false;
