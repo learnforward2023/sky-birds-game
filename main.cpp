@@ -1,4 +1,4 @@
-#include "Common.h"
+#include "src/common/Common.h"
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
@@ -8,7 +8,7 @@ void renderBackground() {
   // Get the base path for the game application
   std::string basePath = SDL_GetBasePath();
   // Append the image to the base path
-  std::string backgroundPath = basePath.append("../images/background.png");
+  std::string backgroundPath = basePath.append("../assets/images/background/primary.png");
 
   // Load Background image
   SDL_Surface* backgroundSurface = IMG_Load(backgroundPath.c_str());
