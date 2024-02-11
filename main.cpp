@@ -1,5 +1,7 @@
 #include "src/common/Common.h"
 
+#include "src/common/Common.cpp"
+
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
 static SDL_Event event;

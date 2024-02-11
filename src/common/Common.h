@@ -10,8 +10,8 @@
 #include <SDL_image.h>
 #include <string>
 
-static const int GAME_SCREEN_WIDTH = 1400;
-static const int GAME_SCREEN_HEIGHT = 740;
-static const char* GAME_TITLE = "Study Together - Sky Birds Game";
+extern const int GAME_SCREEN_WIDTH;
+extern const int GAME_SCREEN_HEIGHT;
+extern const char* GAME_TITLE;
 
 #endif //SKY_BIRDS_GAME_COMMON_H
