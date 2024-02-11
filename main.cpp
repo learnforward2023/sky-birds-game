@@ -1,38 +1,19 @@
 #include "src/common/Common.h"
 
 #include "src/common/Common.cpp"
+#include "src/Base/Base.cpp"
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
 static SDL_Event event;
 
-void renderBackground() {
-  // Get the base path for the game application
-  std::string basePath = SDL_GetBasePath();
-  // Append the image to the base path
-  std::string backgroundPath = basePath.append("../assets/images/background/primary.png");
+Base* loadBackground() {
+  Base* background = new Base();
+  background->LoadTexture("/background/primary.png", screen);
+  SDL_Rect rect = {0, 0, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT};
+  background->SetRect(rect);
 
-  // Load Background image
-  SDL_Surface* backgroundSurface = IMG_Load(backgroundPath.c_str());
-  if (backgroundSurface == nullptr) {
-    printf("Unable to load image %s! SDL Error: %s\n", backgroundPath.c_str(), SDL_GetError());
-
-    return;
-  }
-
-  // Create texture from surface pixels
-  SDL_Texture* backgroundTexture = SDL_CreateTextureFromSurface(screen, backgroundSurface);
-  if (backgroundTexture == nullptr) {
-    printf("Unable to create texture from %s! SDL Error: %s\n", backgroundPath.c_str(), SDL_GetError());
-
-    return;
-  }
-
-  SDL_FreeSurface(backgroundSurface); // Free the surface after creating the texture
-  SDL_Rect backgroundRect = {0, 0, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT};
-
-  // Render the background
-  SDL_RenderCopy(screen, backgroundTexture, nullptr, &backgroundRect);
+  return background;
 }
 
 int main(int argc, char* args[]) {
@@ -56,6 +37,9 @@ int main(int argc, char* args[]) {
     return 1;
   }
 
+  // Load the background
+  Base* background = loadBackground();
+
   // Main game loop
   bool quit = false;
   while (!quit) {
@@ -70,7 +54,7 @@ int main(int argc, char* args[]) {
     SDL_RenderClear(screen);
 
     // Draw your game elements here
-    renderBackground();
+    background->Render(screen);
 
     // Update the screen
     SDL_RenderPresent(screen);
