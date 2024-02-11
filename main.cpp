@@ -1,19 +1,16 @@
-#include <SDL.h>
-#include <SDL_image.h>
-#include <string>
+#include "src/common/Common.h"
+
+#include "src/common/Common.cpp"
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
 static SDL_Event event;
-const int GAME_SCREEN_WIDTH = 1400;
-const int GAME_SCREEN_HEIGHT = 740;
-const char* GAME_TITLE = "Study Together - Sky Birds Game";
 
 void renderBackground() {
   // Get the base path for the game application
   std::string basePath = SDL_GetBasePath();
   // Append the image to the base path
-  std::string backgroundPath = basePath.append("../images/background.png");
+  std::string backgroundPath = basePath.append("../assets/images/background/primary.png");
 
   // Load Background image
   SDL_Surface* backgroundSurface = IMG_Load(backgroundPath.c_str());
