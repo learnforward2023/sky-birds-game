@@ -10,4 +10,7 @@ Fixes:
 
 ## Other Information
 
+Website: https://studytogether.vn/ 🌟
+Tiktok: [Lets Study Together](https://www.tiktok.com/@study2together) 🙏
+
 <!--- Ghi thêm các thông tin liên quan đến PR này, và các hình ảnh nếu có -->
