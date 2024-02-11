@@ -1,13 +1,8 @@
-#include <SDL.h>
-#include <SDL_image.h>
-#include <string>
+#include "Common.h"
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
 static SDL_Event event;
-const int GAME_SCREEN_WIDTH = 1400;
-const int GAME_SCREEN_HEIGHT = 740;
-const char* GAME_TITLE = "Study Together - Sky Birds Game";
 
 void renderBackground() {
   // Get the base path for the game application
