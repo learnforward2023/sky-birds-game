@@ -8,12 +8,11 @@
 #include "../common/Common.h"
 
 class Base {
-  private:
+  protected:
     int _xPos, _yPos;
     SDL_Rect _rect;
     SDL_Texture* _texture;
 
-  protected:
     SDL_Surface* LoadSurface(const std::string &path);
 
   public:
