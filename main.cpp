@@ -2,6 +2,7 @@
 
 #include "src/common/Common.cpp"
 #include "src/Base/Base.cpp"
+#include "src/player/Player.cpp"
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
@@ -28,6 +29,7 @@ int main(int argc, char* args[]) {
   }
 
   Base* background = loadBackground();
+  Player* player = new Player(screen);
 
   // Main game loop
   bool quit = false;
@@ -44,6 +46,7 @@ int main(int argc, char* args[]) {
 
     // Draw your game elements here
     background->Render(screen);
+    player->Render(screen);
 
     // Update the screen
     SDL_RenderPresent(screen);
