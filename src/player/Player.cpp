@@ -37,38 +37,6 @@ Player::~Player() {
 }
 
 /**
- * Load the texture of the player. If the texture is loaded successfully, set the width and height of the frame.
- * @param const std::string &path
- * @param SDL_Renderer* screen
- * @return bool, true if the texture is loaded successfully, false otherwise
- */
-void Player::LoadTexture(const std::string &path, SDL_Renderer* screen) {
-  bool ret = Base::LoadTexture(path, screen);
-
-  if (ret) {
-    _widthFrame = _rect.w / 10;
-    _heightFrame = _rect.h;
-  }
-}
-
-/**
- * Set the frame clip of the player.
- * @return void
- */
-void Player::SetFrameClip() {
-  if (_widthFrame <= 0 & _heightFrame <= 0) {
-    return;
-  }
-
-  for (int i = 0; i < 10; i++) {
-    _frameClip[i].x = i * _widthFrame;
-    _frameClip[i].y = 0;
-    _frameClip[i].w = _widthFrame;
-    _frameClip[i].h = _heightFrame;
-  }
-}
-
-/**
  * Render the player on the screen.
  * @param SDL_Renderer* screen
  * @return void

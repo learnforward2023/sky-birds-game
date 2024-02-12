@@ -77,6 +77,8 @@ bool Base::LoadTexture(const std::string &path, SDL_Renderer* screen) {
 
     _rect.w = loadedSurface->w;
     _rect.h = loadedSurface->h;
+    _widthFrame = _rect.w / 10;
+    _heightFrame = _rect.h;
 
     SDL_FreeSurface(loadedSurface);
   }
@@ -108,4 +110,21 @@ void Base::Render(SDL_Renderer* des, SDL_Rect *clip, SDL_Rect *rect) {
   }
 
   SDL_RenderCopy(des, _texture, clip, &renderQuad);
+}
+
+/**
+ * Set the frame clip of the player.
+ * @return void
+ */
+void Base::SetFrameClip() {
+  if (_widthFrame <= 0 & _heightFrame <= 0) {
+    return;
+  }
+
+  for (int i = 0; i < 10; i++) {
+    _frameClip[i].x = i * _widthFrame;
+    _frameClip[i].y = 0;
+    _frameClip[i].w = _widthFrame;
+    _frameClip[i].h = _heightFrame;
+  }
 }
