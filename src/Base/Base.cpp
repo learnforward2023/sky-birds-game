@@ -77,7 +77,7 @@ bool Base::LoadTexture(const std::string &path, SDL_Renderer* screen) {
 
     _rect.w = loadedSurface->w;
     _rect.h = loadedSurface->h;
-    _widthFrame = _rect.w / 10;
+    _widthFrame = _rect.w / NUMBER_OF_FRAMES;
     _heightFrame = _rect.h;
 
     SDL_FreeSurface(loadedSurface);
@@ -121,7 +121,7 @@ void Base::SetFrameClip() {
     return;
   }
 
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < NUMBER_OF_FRAMES; i++) {
     _frameClip[i].x = i * _widthFrame;
     _frameClip[i].y = 0;
     _frameClip[i].w = _widthFrame;

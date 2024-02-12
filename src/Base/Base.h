@@ -14,7 +14,7 @@ class Base {
     SDL_Texture* _texture;
     int _widthFrame, _heightFrame;
     int _currentFrame;
-    SDL_Rect _frameClip[10];
+    SDL_Rect _frameClip[NUMBER_OF_FRAMES];
 
     SDL_Surface* LoadSurface(const std::string &path);
 
