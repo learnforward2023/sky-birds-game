@@ -45,6 +45,16 @@ Player::~Player() {
 void Player::Render(SDL_Renderer* screen) {
   if (_currentFrame >= 10) {
     _currentFrame = 0;
+
+    if (_state == CHARACTER_STATE::ATTACKING) {
+      _state = CHARACTER_STATE::FLYING;
+    }
+  }
+
+  if (_state == ATTACKING) {
+    LoadTexture("/player/attacking.png", screen);
+  } else {
+    LoadTexture("/player/flying.png", screen);
   }
 
   HandleMove();
@@ -87,6 +97,9 @@ void Player::HandleKeyDown(SDL_Event event) {
         break;
       case SDLK_RIGHT:
         _inputType._right = true;
+        break;
+      case SDLK_SPACE:
+        _state = ATTACKING;
         break;
       default:
         break;

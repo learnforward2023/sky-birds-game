@@ -21,4 +21,9 @@ struct Input {
   bool _left, _right, _up, _down;
 };
 
+enum CHARACTER_STATE {
+  FLYING = 0,
+  ATTACKING,
+};
+
 #endif //SKY_BIRDS_GAME_COMMON_H
