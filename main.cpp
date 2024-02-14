@@ -90,6 +90,11 @@ bool initialize() {
     return false;
   }
 
+  if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+    printf("Failed to open audio: %s\n", Mix_GetError());
+    return false;
+  }
+
   // Create a window
   window = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, GAME_SCREEN_WIDTH,
                             GAME_SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
