@@ -15,6 +15,7 @@ class Player : public Base {
     ~Player();
 
     void Render(SDL_Renderer* screen);
+    void HandleInputAction(SDL_Event event, SDL_Renderer *screen);
 };
 
 #endif //SKY_BIRDS_GAME_PLAYER_H

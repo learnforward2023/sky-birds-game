@@ -39,6 +39,8 @@ int main(int argc, char* args[]) {
       if (event.type == SDL_QUIT) {
         quit = true;
       }
+
+      player->HandleInputAction(event, screen);
     }
 
     // Clear the screen
