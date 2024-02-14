@@ -119,3 +119,27 @@ void Player::HandleKeyUp(SDL_Event event) {
     }
   }
 }
+
+/**
+ * Handle the movement of the player.
+ * @return void
+ */
+void Player::HandleMove() {
+  if (_inputType._up && _yPos < 0) {
+    _inputType._up = false;
+  }
+
+  if (_inputType._down && _yPos > GAME_SCREEN_HEIGHT - _heightFrame) {
+    _inputType._down = false;
+  }
+
+  if (_inputType._left && _xPos < 0) {
+    _inputType._left = false;
+  }
+
+  if (_inputType._right && _xPos > GAME_SCREEN_WIDTH - _widthFrame) {
+    _inputType._right = false;
+  }
+
+  Base::HandleMove();
+}
