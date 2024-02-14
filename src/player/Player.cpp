@@ -109,11 +109,14 @@ void Player::HandleKeyDown(SDL_Event event) {
         _inputType._right = true;
         break;
       case SDLK_SPACE:
-        _state = ATTACKING;
-        // Play the shooting sound
-        if (Mix_PlayChannel(-1, _attackSound, 0) == -1) {
-          printf("Failed to play shooting sound: %s\n", Mix_GetError());
-          // Handle the error accordingly
+        if (_state != ATTACKING) {
+          _state = ATTACKING;
+          _currentFrame = 0;
+          // Play the shooting sound
+          if (Mix_PlayChannel(-1, _attackSound, 0) == -1) {
+            printf("Failed to play shooting sound: %s\n", Mix_GetError());
+            // Handle the error accordingly
+          }
         }
         break;
       default:
