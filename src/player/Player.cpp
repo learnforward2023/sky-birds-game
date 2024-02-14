@@ -27,6 +27,16 @@ Player::Player(SDL_Renderer* screen) {
 
   LoadTexture("/player/flying.png", screen);
   SetFrameClip();
+
+  char *basePath = SDL_GetBasePath();
+  std::string soundPath = basePath ? basePath : "";
+  soundPath += "../assets/sound_effects/attacking.wav";
+
+  _attackSound = Mix_LoadWAV(soundPath.c_str());
+  if (!_attackSound) {
+    printf("Failed to load shooting sound: %s\n", Mix_GetError());
+    // Handle the error accordingly
+  }
 }
 
 /**
@@ -100,6 +110,11 @@ void Player::HandleKeyDown(SDL_Event event) {
         break;
       case SDLK_SPACE:
         _state = ATTACKING;
+        // Play the shooting sound
+        if (Mix_PlayChannel(-1, _attackSound, 0) == -1) {
+          printf("Failed to play shooting sound: %s\n", Mix_GetError());
+          // Handle the error accordingly
+        }
         break;
       default:
         break;

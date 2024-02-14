@@ -10,6 +10,8 @@
 
 class Player : public Base {
   private:
+    Mix_Chunk* _attackSound;
+
     void HandleKeyUp(SDL_Event event);
     void HandleKeyDown(SDL_Event event);
     void HandleMove();

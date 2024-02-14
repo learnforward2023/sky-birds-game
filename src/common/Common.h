@@ -8,6 +8,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <string>
 
 extern const int GAME_SCREEN_WIDTH;
