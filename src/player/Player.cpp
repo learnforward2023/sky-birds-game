@@ -47,21 +47,7 @@ void Player::Render(SDL_Renderer* screen) {
     _currentFrame = 0;
   }
 
-  if (_inputType._up) {
-    _yPos -= _speed;
-  }
-
-  if (_inputType._down) {
-    _yPos += _speed;
-  }
-
-  if (_inputType._left) {
-    _xPos -= _speed;
-  }
-
-  if (_inputType._right) {
-    _xPos += _speed;
-  }
+  HandleMove();
 
   SDL_Rect* currentClip = &_frameClip[_currentFrame];
   SDL_Rect renderQuad = { _xPos, _yPos, _widthFrame, _heightFrame };
@@ -75,6 +61,19 @@ void Player::Render(SDL_Renderer* screen) {
  * @return void
  */
 void Player::HandleInputAction(SDL_Event event, SDL_Renderer* screen) {
+  if (event.type == SDL_KEYDOWN) {
+    HandleKeyDown(event);
+  } else if (event.type == SDL_KEYUP) {
+    HandleKeyUp(event);
+  }
+}
+
+/**
+ * Handle the key down event of the player.
+ * @param SDL_Event event
+ * @return void
+ */
+void Player::HandleKeyDown(SDL_Event event) {
   if (event.type == SDL_KEYDOWN) {
     switch (event.key.keysym.sym) {
       case SDLK_UP:
@@ -93,7 +92,14 @@ void Player::HandleInputAction(SDL_Event event, SDL_Renderer* screen) {
         break;
     }
   }
+}
 
+/**
+ * Handle the key up event of the player.
+ * @param SDL_Event event
+ * @return void
+ */
+void Player::HandleKeyUp(SDL_Event event) {
   if (event.type == SDL_KEYUP) {
     switch (event.key.keysym.sym) {
       case SDLK_UP:

@@ -128,3 +128,26 @@ void Base::SetFrameClip() {
     _frameClip[i].h = _heightFrame;
   }
 }
+
+/**
+ * Handle the movement of the player.
+ * @return void
+ */
+
+void Base::HandleMove() {
+  if (_inputType._up) {
+    _yPos -= _speed;
+  }
+
+  if (_inputType._down) {
+    _yPos += _speed;
+  }
+
+  if (_inputType._left) {
+    _xPos -= _speed;
+  }
+
+  if (_inputType._right) {
+    _xPos += _speed;
+  }
+}
