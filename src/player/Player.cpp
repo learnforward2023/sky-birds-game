@@ -23,7 +23,7 @@ Player::Player(SDL_Renderer* screen) {
   _widthFrame = 0;
   _heightFrame = 0;
   _currentFrame = 0;
-  _speed = 5;
+  _speed = 10;
 
   LoadTexture("/player/flying.png", screen);
   SetFrameClip();
