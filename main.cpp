@@ -34,6 +34,8 @@ int main(int argc, char* args[]) {
   // Main game loop
   bool quit = false;
   while (!quit) {
+    Uint32 frameStart = SDL_GetTicks();
+
     // Event handling
     while (SDL_PollEvent(&event) != 0) {
       if (event.type == SDL_QUIT) {
@@ -52,6 +54,11 @@ int main(int argc, char* args[]) {
 
     // Update the screen
     SDL_RenderPresent(screen);
+
+    int frameTime = SDL_GetTicks() - frameStart;
+    if (frameTime < GAME_TICKS_PER_FRAME) {
+      SDL_Delay(GAME_TICKS_PER_FRAME - frameTime);
+    }
   }
 
   cleanup();

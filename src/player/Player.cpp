@@ -23,7 +23,7 @@ Player::Player(SDL_Renderer* screen) {
   _widthFrame = 0;
   _heightFrame = 0;
   _currentFrame = 0;
-  _speed = 5;
+  _speed = 10;
 
   LoadTexture("/player/flying.png", screen);
   SetFrameClip();
@@ -118,4 +118,28 @@ void Player::HandleKeyUp(SDL_Event event) {
         break;
     }
   }
+}
+
+/**
+ * Handle the movement of the player.
+ * @return void
+ */
+void Player::HandleMove() {
+  if (_inputType._up && _yPos < 0) {
+    _inputType._up = false;
+  }
+
+  if (_inputType._down && _yPos > GAME_SCREEN_HEIGHT - _heightFrame) {
+    _inputType._down = false;
+  }
+
+  if (_inputType._left && _xPos < 0) {
+    _inputType._left = false;
+  }
+
+  if (_inputType._right && _xPos > GAME_SCREEN_WIDTH - _widthFrame) {
+    _inputType._right = false;
+  }
+
+  Base::HandleMove();
 }

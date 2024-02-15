@@ -14,6 +14,8 @@ extern const int GAME_SCREEN_WIDTH;
 extern const int GAME_SCREEN_HEIGHT;
 extern const char* GAME_TITLE;
 extern const int NUMBER_OF_FRAMES;
+extern const int GAME_FPS;
+extern const int GAME_TICKS_PER_FRAME;
 
 struct Input {
   bool _left, _right, _up, _down;

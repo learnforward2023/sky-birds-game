@@ -12,6 +12,7 @@ class Player : public Base {
   private:
     void HandleKeyUp(SDL_Event event);
     void HandleKeyDown(SDL_Event event);
+    void HandleMove();
 
   public:
     Player();
