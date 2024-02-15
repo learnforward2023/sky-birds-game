@@ -3,6 +3,7 @@
 #include "src/common/Common.cpp"
 #include "src/Base/Base.cpp"
 #include "src/player/Player.cpp"
+#include "src/sound_effect/SoundEffect.cpp"
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
@@ -111,6 +112,9 @@ bool initialize() {
 
     return false;
   }
+
+  // Init sound effect
+  new SoundEffect();
 
   return true;
 }
