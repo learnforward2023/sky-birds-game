@@ -17,6 +17,7 @@ class Base {
     int _widthFrame, _heightFrame;
     int _currentFrame;
     SDL_Rect _frameClip[NUMBER_OF_FRAMES];
+    CHARACTER_STATE _state;
 
     SDL_Surface* LoadSurface(const std::string &path);
     void HandleMove();
