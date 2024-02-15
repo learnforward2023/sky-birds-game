@@ -23,6 +23,7 @@ Player::Player(SDL_Renderer* screen) {
   _widthFrame = 0;
   _heightFrame = 0;
   _currentFrame = 0;
+  _speed = 5;
 
   LoadTexture("/player/flying.png", screen);
   SetFrameClip();
@@ -46,9 +47,75 @@ void Player::Render(SDL_Renderer* screen) {
     _currentFrame = 0;
   }
 
+  HandleMove();
+
   SDL_Rect* currentClip = &_frameClip[_currentFrame];
   SDL_Rect renderQuad = { _xPos, _yPos, _widthFrame, _heightFrame };
   Base::Render(screen, currentClip, &renderQuad);
 
   _currentFrame++;
+}
+
+/**
+ * Set the frame clip of the player,
+ * @return void
+ */
+void Player::HandleInputAction(SDL_Event event, SDL_Renderer* screen) {
+  if (event.type == SDL_KEYDOWN) {
+    HandleKeyDown(event);
+  } else if (event.type == SDL_KEYUP) {
+    HandleKeyUp(event);
+  }
+}
+
+/**
+ * Handle the key down event of the player.
+ * @param SDL_Event event
+ * @return void
+ */
+void Player::HandleKeyDown(SDL_Event event) {
+  if (event.type == SDL_KEYDOWN) {
+    switch (event.key.keysym.sym) {
+      case SDLK_UP:
+        _inputType._up = true;
+        break;
+      case SDLK_DOWN:
+        _inputType._down = true;
+        break;
+      case SDLK_LEFT:
+        _inputType._left = true;
+        break;
+      case SDLK_RIGHT:
+        _inputType._right = true;
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+/**
+ * Handle the key up event of the player.
+ * @param SDL_Event event
+ * @return void
+ */
+void Player::HandleKeyUp(SDL_Event event) {
+  if (event.type == SDL_KEYUP) {
+    switch (event.key.keysym.sym) {
+      case SDLK_UP:
+        _inputType._up = false;
+        break;
+      case SDLK_DOWN:
+        _inputType._down = false;
+        break;
+      case SDLK_LEFT:
+        _inputType._left = false;
+        break;
+      case SDLK_RIGHT:
+        _inputType._right = false;
+        break;
+      default:
+        break;
+    }
+  }
 }

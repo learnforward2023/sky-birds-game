@@ -15,4 +15,8 @@ extern const int GAME_SCREEN_HEIGHT;
 extern const char* GAME_TITLE;
 extern const int NUMBER_OF_FRAMES;
 
+struct Input {
+  bool _left, _right, _up, _down;
+};
+
 #endif //SKY_BIRDS_GAME_COMMON_H

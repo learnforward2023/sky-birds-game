@@ -9,6 +9,8 @@
 
 class Base {
   protected:
+    int _speed;
+    Input _inputType;
     int _xPos, _yPos;
     SDL_Rect _rect;
     SDL_Texture* _texture;
@@ -17,6 +19,7 @@ class Base {
     SDL_Rect _frameClip[NUMBER_OF_FRAMES];
 
     SDL_Surface* LoadSurface(const std::string &path);
+    void HandleMove();
 
   public:
     Base();
