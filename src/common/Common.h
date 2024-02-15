@@ -27,4 +27,8 @@ enum CHARACTER_STATE {
   ATTACKING,
 };
 
+enum SOUND_EFFECT {
+  ATTACK = 0,
+};
+
 #endif //SKY_BIRDS_GAME_COMMON_H

@@ -3,6 +3,7 @@
 //
 
 #include "Player.h"
+#include "../sound_effect/SoundEffect.h"
 
 /**
  * Constructor of Player class to initialize the properties of the player.
@@ -112,11 +113,8 @@ void Player::HandleKeyDown(SDL_Event event) {
         if (_state != ATTACKING) {
           _state = ATTACKING;
           _currentFrame = 0;
-          // Play the shooting sound
-          if (Mix_PlayChannel(-1, _attackSound, 0) == -1) {
-            printf("Failed to play shooting sound: %s\n", Mix_GetError());
-            // Handle the error accordingly
-          }
+
+          SoundEffect::PlaySound(SOUND_EFFECT::ATTACK);
         }
         break;
       default:
