@@ -28,16 +28,6 @@ Player::Player(SDL_Renderer* screen) {
 
   LoadTexture("/player/flying.png", screen);
   SetFrameClip();
-
-  char *basePath = SDL_GetBasePath();
-  std::string soundPath = basePath ? basePath : "";
-  soundPath += "../assets/sound_effects/attacking.wav";
-
-  _attackSound = Mix_LoadWAV(soundPath.c_str());
-  if (!_attackSound) {
-    printf("Failed to load shooting sound: %s\n", Mix_GetError());
-    // Handle the error accordingly
-  }
 }
 
 /**
@@ -62,12 +52,7 @@ void Player::Render(SDL_Renderer* screen) {
     }
   }
 
-  if (_state == ATTACKING) {
-    LoadTexture("/player/attacking.png", screen);
-  } else {
-    LoadTexture("/player/flying.png", screen);
-  }
-
+  LoadTextureViaState(screen);
   HandleMove();
 
   SDL_Rect* currentClip = &_frameClip[_currentFrame];
@@ -110,12 +95,7 @@ void Player::HandleKeyDown(SDL_Event event) {
         _inputType._right = true;
         break;
       case SDLK_SPACE:
-        if (_state != ATTACKING) {
-          _state = ATTACKING;
-          _currentFrame = 0;
-
-          SoundEffect::PlaySound(SOUND_EFFECT::ATTACK);
-        }
+        HandleAttack();
         break;
       default:
         break;
@@ -171,4 +151,32 @@ void Player::HandleMove() {
   }
 
   Base::HandleMove();
+}
+
+/**
+ * Handle the attack of the player.
+ * @return void
+ */
+void Player::HandleAttack() {
+  if (_state == ATTACKING) {
+    return;
+  }
+
+  _state = ATTACKING;
+  _currentFrame = 0;
+
+  SoundEffect::PlaySound(SOUND_EFFECT::ATTACK);
+}
+
+/**
+ * Load the texture of the player based on the state of the player.
+ * @param SDL_Renderer* screen
+ * @return void
+ */
+void Player::LoadTextureViaState(SDL_Renderer *screen) {
+  if (_state == ATTACKING) {
+    LoadTexture("/player/attacking.png", screen);
+  } else {
+    LoadTexture("/player/flying.png", screen);
+  }
 }
