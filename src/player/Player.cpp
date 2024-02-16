@@ -4,6 +4,7 @@
 
 #include "Player.h"
 #include "../sound_effect/SoundEffect.h"
+#include "../bullet/Bullet.h"
 
 /**
  * Constructor of Player class to initialize the properties of the player.
@@ -57,6 +58,7 @@ void Player::Render(SDL_Renderer* screen) {
 
   SDL_Rect* currentClip = &_frameClip[_currentFrame];
   SDL_Rect renderQuad = { _xPos, _yPos, _widthFrame, _heightFrame };
+  Bullet::RenderBullets(screen, _bullets);
   Base::Render(screen, currentClip, &renderQuad);
 
   _currentFrame++;
@@ -68,7 +70,7 @@ void Player::Render(SDL_Renderer* screen) {
  */
 void Player::HandleInputAction(SDL_Event event, SDL_Renderer* screen) {
   if (event.type == SDL_KEYDOWN) {
-    HandleKeyDown(event);
+    HandleKeyDown(event, screen);
   } else if (event.type == SDL_KEYUP) {
     HandleKeyUp(event);
   }
@@ -79,7 +81,7 @@ void Player::HandleInputAction(SDL_Event event, SDL_Renderer* screen) {
  * @param SDL_Event event
  * @return void
  */
-void Player::HandleKeyDown(SDL_Event event) {
+void Player::HandleKeyDown(SDL_Event event, SDL_Renderer* screen) {
   if (event.type == SDL_KEYDOWN) {
     switch (event.key.keysym.sym) {
       case SDLK_UP:
@@ -95,7 +97,7 @@ void Player::HandleKeyDown(SDL_Event event) {
         _inputType._right = true;
         break;
       case SDLK_SPACE:
-        HandleAttack();
+        HandleAttack(screen);
         break;
       default:
         break;
@@ -157,13 +159,14 @@ void Player::HandleMove() {
  * Handle the attack of the player.
  * @return void
  */
-void Player::HandleAttack() {
+void Player::HandleAttack(SDL_Renderer *screen) {
   if (_state == ATTACKING) {
     return;
   }
 
   _state = ATTACKING;
   _currentFrame = 0;
+  _bullets.push_back(new Bullet(BULLET_TYPE::NORMAL, _xPos, _yPos, screen));
 
   SoundEffect::PlaySound(SOUND_EFFECT::ATTACK);
 }

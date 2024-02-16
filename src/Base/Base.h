@@ -19,19 +19,19 @@ class Base {
     SDL_Rect _frameClip[NUMBER_OF_FRAMES];
     CHARACTER_STATE _state;
 
-    SDL_Surface* LoadSurface(const std::string &path);
-    void HandleMove();
-
   public:
     Base();
     ~Base();
 
     void SetRect(const SDL_Rect &rect) { _rect = rect; }
+    SDL_Rect GetRect() const { return _rect; }
 
     void Free();
     bool LoadTexture(const std::string &path, SDL_Renderer* screen);
-    void Render(SDL_Renderer* des, SDL_Rect *clip = nullptr, SDL_Rect *rect = nullptr);
+    virtual void Render(SDL_Renderer* des, SDL_Rect *clip = nullptr, SDL_Rect *rect = nullptr);
     void SetFrameClip();
+    SDL_Surface* LoadSurface(const std::string &path);
+    void HandleMove();
 };
 
 #endif //SKY_BIRDS_GAME_BASE_H
