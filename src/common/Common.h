@@ -35,7 +35,9 @@ enum BULLET_TYPE {
   NORMAL = 0,
   MID,
   PRO,
+  NORMALIZE,
+  MIDIZE,
+  PROIZE,
 };
-
 
 #endif //SKY_BIRDS_GAME_COMMON_H
