@@ -14,9 +14,17 @@ class Bullet : public Base {
     int _damage;
     int _deviation;
 
+    void loadBulletViaType(BULLET_TYPE bulletType, SDL_Renderer *screen);
+
   public:
     Bullet();
+    Bullet(BULLET_TYPE bulletType, int xPos, int yPos, SDL_Renderer *screen);
     ~Bullet();
+
+    void Render(SDL_Renderer *screen, SDL_Rect *clip = nullptr, SDL_Rect *rect = nullptr);
+
+    static void RenderBullets(SDL_Renderer *screen, std::vector<Base*> &bullets);
+    static void ClearBullets(std::vector<Base*> &bullets);
 };
 
 #endif //SKY_BIRDS_GAME_BULLET_H
