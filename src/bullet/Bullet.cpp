@@ -28,8 +28,9 @@ Bullet::~Bullet() {
  * @param yPos
  * @param screen
  */
-Bullet::Bullet(BULLET_TYPE bulletType, int xPos, int yPos, SDL_Renderer* screen) {
+Bullet::Bullet(BULLET_TYPE bulletType, int xPos, int yPos, int deviation, SDL_Renderer* screen) {
   loadBulletViaType(bulletType, screen);
+  _deviation = deviation;
   _xPos = xPos;
   _yPos = yPos + 20;
 }
@@ -46,7 +47,7 @@ void Bullet::loadBulletViaType(BULLET_TYPE bulletType, SDL_Renderer * screen) {
     case BULLET_TYPE::NORMAL:
       LoadTexture("/bullet/normal.png", screen);
       _rect = {0, 0, 27, 9};
-      _speed = 10; _damage = 20; _deviation = 0;
+      _speed = 10; _damage = 20;
       break;
     default:
       break;

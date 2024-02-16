@@ -26,6 +26,7 @@ Player::Player(SDL_Renderer* screen) {
   _heightFrame = 0;
   _currentFrame = 0;
   _speed = 10;
+  _level = 1;
 
   LoadTexture("/player/flying.png", screen);
   SetFrameClip();
@@ -166,7 +167,7 @@ void Player::HandleAttack(SDL_Renderer *screen) {
 
   _state = ATTACKING;
   _currentFrame = 0;
-  _bullets.push_back(new Bullet(BULLET_TYPE::NORMAL, _xPos, _yPos, screen));
+  CreateBulletViaLevel(screen);
 
   SoundEffect::PlaySound(SOUND_EFFECT::ATTACK);
 }
@@ -181,5 +182,20 @@ void Player::LoadTextureViaState(SDL_Renderer *screen) {
     LoadTexture("/player/attacking.png", screen);
   } else {
     LoadTexture("/player/flying.png", screen);
+  }
+}
+
+/**
+ * Create the bullet based on the level of the player.
+ * @param SDL_Renderer* screen
+ * @return void
+ */
+void Player::CreateBulletViaLevel(SDL_Renderer *screen) {
+  switch (_level) {
+    case 1:
+      _bullets.push_back(new Bullet(BULLET_TYPE::NORMAL, _xPos + _widthFrame, _yPos, 0, screen));
+      break;
+    default:
+      break;
   }
 }
