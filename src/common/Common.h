@@ -31,4 +31,11 @@ enum SOUND_EFFECT {
   ATTACK = 0,
 };
 
+enum BULLET_TYPE {
+  NORMAL = 0,
+  MID,
+  PRO,
+};
+
+
 #endif //SKY_BIRDS_GAME_COMMON_H
