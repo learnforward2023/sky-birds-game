@@ -24,6 +24,9 @@ class Enemy : public Base {
     void Render(SDL_Renderer* screen);
     void HandleRandomMove(SDL_Renderer* screen);
     virtual void HandleAttackRandomly(SDL_Renderer* screen) {};
+
+    void SetHP(int hp) { _hp = hp; }
+    int GetHP() { return _hp; }
 };
 
 #endif //SKY_BIRDS_GAME_ENEMY_H

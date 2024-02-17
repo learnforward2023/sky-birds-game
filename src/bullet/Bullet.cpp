@@ -151,7 +151,7 @@ void Bullet::ClearBullets(std::vector<Base*> &bullets) {
   for (int i = 0; i < bullets.size(); i++) {
     Base* bullet = bullets.at(i);
     if (bullet != NULL) {
-      if (bullet->GetRect().x > GAME_SCREEN_WIDTH) {
+      if (bullet->GetXPos() > GAME_SCREEN_WIDTH || bullet->GetXPos() < 0 || bullet->GetState() == CHARACTER_STATE::DEAD) {
         bullets.erase(bullets.begin() + i);
         if (bullet != NULL) {
           delete bullet;

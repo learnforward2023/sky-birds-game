@@ -29,7 +29,6 @@ Explosion::~Explosion() {
  */
 void Explosion::Render(SDL_Renderer *screen) {
   if (_currentFrame >= 10) {
-    _currentFrame = 0;
     _state = CHARACTER_STATE::DEAD;
   }
 
