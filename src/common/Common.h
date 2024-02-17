@@ -40,4 +40,11 @@ enum BULLET_TYPE {
   PROIZE,
 };
 
+enum ENEMY_TYPE {
+  ALIEN = 0,
+  DARK,
+  EYE,
+  HORN,
+};
+
 #endif //SKY_BIRDS_GAME_COMMON_H
