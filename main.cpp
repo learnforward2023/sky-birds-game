@@ -6,6 +6,7 @@
 #include "src/sound_effect/SoundEffect.cpp"
 #include "src/bullet/Bullet.cpp"
 #include "src/enemy/Enemy.cpp"
+#include "src/dark/Dark.cpp"
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
@@ -33,8 +34,7 @@ int main(int argc, char* args[]) {
 
   Base* background = loadBackground();
   Player* player = new Player(screen);
-  Enemy* enemy = new Enemy();
-  enemy->LoadTextureViaState(screen);
+  Enemy* enemy = new Dark(screen);
 
   // Main game loop
   bool quit = false;
