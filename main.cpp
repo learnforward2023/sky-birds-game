@@ -7,6 +7,8 @@
 #include "src/bullet/Bullet.cpp"
 #include "src/enemy/Enemy.cpp"
 #include "src/dark/Dark.cpp"
+#include "src/horn/Horn.cpp"
+#include "src/alien/Alien.cpp"
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
@@ -34,7 +36,9 @@ int main(int argc, char* args[]) {
 
   Base* background = loadBackground();
   Player* player = new Player(screen);
-  Enemy* enemy = new Dark(screen);
+  Enemy* dark = new Dark(screen);
+  Enemy* horn = new Horn(screen);
+  Enemy* alien = new Alien(screen);
 
   // Main game loop
   bool quit = false;
@@ -56,7 +60,9 @@ int main(int argc, char* args[]) {
     // Draw your game elements here
     background->Render(screen);
     player->Render(screen);
-    enemy->HandleRandomMove(screen);
+    horn->HandleRandomMove(screen);
+    dark->HandleRandomMove(screen);
+    alien->HandleRandomMove(screen);
 
     // Update the screen
     SDL_RenderPresent(screen);
