@@ -9,6 +9,7 @@
 #include "src/dark/Dark.cpp"
 #include "src/horn/Horn.cpp"
 #include "src/alien/Alien.cpp"
+#include "src/explosion/Explosion.cpp"
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
@@ -21,6 +22,7 @@ Base* loadBackground();
 bool initialize();
 void cleanup();
 void CreateAndRenderEnemies(std::vector<Enemy*> &enemies, SDL_Renderer* screen);
+void CheckCollisionAndRenderExplosion(Player* player, std::vector<Enemy*> &enemies, std::vector<Explosion*> &explosions);
 
 /**
  * Main function, the entry point of the game - Sky Birds Game with SDL 2 and C++ - Study Together
@@ -38,6 +40,7 @@ int main(int argc, char* args[]) {
   Base* background = loadBackground();
   Player* player = new Player(screen);
   std::vector<Enemy*> enemies;
+  std::vector<Explosion*> explosions;
 
   // Main game loop
   bool quit = false;
@@ -60,6 +63,7 @@ int main(int argc, char* args[]) {
     background->Render(screen);
     player->Render(screen);
     CreateAndRenderEnemies(enemies, screen);
+    CheckCollisionAndRenderExplosion(player, enemies, explosions);
 
     // Update the screen
     SDL_RenderPresent(screen);
@@ -165,5 +169,53 @@ void CreateAndRenderEnemies(std::vector<Enemy*> &enemies, SDL_Renderer* screen) 
 
   for (auto &enemy : enemies) {
     enemy->HandleRandomMove(screen);
+  }
+
+  // Remove the enemies from the screen if state is dead
+  for (int i = 0; i < enemies.size(); i++) {
+    Enemy* enemy = enemies.at(i);
+    if (enemy->GetHP() <= 0) {
+      enemies.erase(enemies.begin() + i);
+      if (enemy != NULL) {
+        delete enemy;
+        enemy = NULL;
+      }
+    }
+  }
+}
+
+/**
+ * Check collision and render explosion
+ * @param player The player
+ * @param enemies The enemies
+ * @param explosions The explosions
+ */
+void CheckCollisionAndRenderExplosion(Player* player, std::vector<Enemy*> &enemies, std::vector<Explosion*> &explosions) {
+  for (auto &enemy : enemies) {
+    for (auto &bullet : player->GetBullets()) {
+
+      if (bullet->GetXPos() >= enemy->GetXPos() && bullet->GetXPos() <= enemy->GetXPos() + enemy->GetRect().w &&
+          bullet->GetYPos() >= enemy->GetYPos() && bullet->GetYPos() <= enemy->GetYPos() + enemy->GetRect().h) {
+        explosions.push_back(new Explosion(enemy->GetXPos(), bullet->GetYPos(), screen));
+        bullet->SetState(CHARACTER_STATE::DEAD);
+        enemy->SetHP(enemy->GetHP() - 20);
+      }
+    }
+  }
+
+  for (auto &explosion : explosions) {
+    explosion->Render(screen);
+  }
+
+  // Clear the explosions from the screen if state is dead
+  for (int i = 0; i < explosions.size(); i++) {
+    Explosion* explosion = explosions.at(i);
+    if (explosion->GetState() == CHARACTER_STATE::DEAD) {
+      explosions.erase(explosions.begin() + i);
+      if (explosion != NULL) {
+        delete explosion;
+        explosion = NULL;
+      }
+    }
   }
 }

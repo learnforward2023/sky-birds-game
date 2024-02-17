@@ -22,7 +22,6 @@ class Bullet : public Base {
     ~Bullet();
 
     void Render(SDL_Renderer *screen, SDL_Rect *clip = nullptr, SDL_Rect *rect = nullptr);
-
     static void RenderBullets(SDL_Renderer *screen, std::vector<Base*> &bullets);
     static void ClearBullets(std::vector<Base*> &bullets);
 };

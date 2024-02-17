@@ -26,6 +26,8 @@ class Player : public Base {
     Player(SDL_Renderer *screen);
     ~Player();
 
+    std::vector<Base*> GetBullets() { return _bullets; }
+
     void Render(SDL_Renderer* screen);
     void HandleInputAction(SDL_Event event, SDL_Renderer *screen);
 };

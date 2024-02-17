@@ -25,6 +25,7 @@ struct Input {
 enum CHARACTER_STATE {
   FLYING = 0,
   ATTACKING,
+  DEAD,
 };
 
 enum SOUND_EFFECT {

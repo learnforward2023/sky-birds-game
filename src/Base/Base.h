@@ -25,6 +25,10 @@ class Base {
 
     void SetRect(const SDL_Rect &rect) { _rect = rect; }
     SDL_Rect GetRect() const { return _rect; }
+    void SetState(const CHARACTER_STATE &state) { _state = state; }
+    CHARACTER_STATE GetState() const { return _state; }
+    int GetXPos() const { return _xPos; }
+    int GetYPos() const { return _yPos; }
 
     void Free();
     bool LoadTexture(const std::string &path, SDL_Renderer* screen);
