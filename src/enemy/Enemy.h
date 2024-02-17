@@ -9,7 +9,7 @@
 #include "../base/Base.h"
 
 class Enemy : public Base {
-  private:
+  protected:
     std::vector<Base*> _bullets;
     ENEMY_TYPE _type;
     int _hp;
