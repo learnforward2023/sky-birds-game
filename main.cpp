@@ -5,6 +5,7 @@
 #include "src/player/Player.cpp"
 #include "src/sound_effect/SoundEffect.cpp"
 #include "src/bullet/Bullet.cpp"
+#include "src/enemy/Enemy.cpp"
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
@@ -32,6 +33,8 @@ int main(int argc, char* args[]) {
 
   Base* background = loadBackground();
   Player* player = new Player(screen);
+  Enemy* enemy = new Enemy();
+  enemy->LoadTextureViaState(screen);
 
   // Main game loop
   bool quit = false;
@@ -53,6 +56,7 @@ int main(int argc, char* args[]) {
     // Draw your game elements here
     background->Render(screen);
     player->Render(screen);
+    enemy->HandleRandomMove(screen);
 
     // Update the screen
     SDL_RenderPresent(screen);
