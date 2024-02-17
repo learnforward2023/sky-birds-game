@@ -9,6 +9,7 @@
 #include "src/dark/Dark.cpp"
 #include "src/horn/Horn.cpp"
 #include "src/alien/Alien.cpp"
+#include "src/explosion/Explosion.cpp"
 
 static SDL_Window *window = nullptr;
 static SDL_Renderer *screen = nullptr;
