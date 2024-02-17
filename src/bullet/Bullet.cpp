@@ -28,10 +28,11 @@ Bullet::~Bullet() {
  * @param yPos
  * @param screen
  */
-Bullet::Bullet(BULLET_TYPE bulletType, int xPos, int yPos, SDL_Renderer* screen) {
+Bullet::Bullet(BULLET_TYPE bulletType, int xPos, int yPos, int deviation, SDL_Renderer* screen) {
   loadBulletViaType(bulletType, screen);
+  _deviation = deviation;
   _xPos = xPos;
-  _yPos = yPos + 20;
+  _yPos = yPos + 10;
 }
 
 /**
@@ -46,7 +47,32 @@ void Bullet::loadBulletViaType(BULLET_TYPE bulletType, SDL_Renderer * screen) {
     case BULLET_TYPE::NORMAL:
       LoadTexture("/bullet/normal.png", screen);
       _rect = {0, 0, 27, 9};
-      _speed = 10; _damage = 20; _deviation = 0;
+      _speed = 16; _damage = 20;
+      break;
+    case BULLET_TYPE::MID:
+      LoadTexture("/bullet/mid.png", screen);
+      _rect = {0, 0, 25, 14};
+      _speed = 18; _damage = 30;
+      break;
+    case BULLET_TYPE::PRO:
+      LoadTexture("/bullet/pro.png", screen);
+      _rect = {0, 0, 18, 18};
+      _speed = 20; _damage = 40;
+      break;
+    case BULLET_TYPE::NORMALIZE:
+      LoadTexture("/bullet/normalize.png", screen);
+      _rect = {0, 0, 32, 24};
+      _speed = 20; _damage = 30;
+      break;
+    case BULLET_TYPE::MIDIZE:
+      LoadTexture("/bullet/midize.png", screen);
+      _rect = {0, 0, 25, 19};
+      _speed = 22; _damage = 40;
+      break;
+    case BULLET_TYPE::PROIZE:
+      LoadTexture("/bullet/proize.png", screen);
+      _rect = {0, 0, 25, 25};
+      _speed = 24; _damage = 50;
       break;
     default:
       break;

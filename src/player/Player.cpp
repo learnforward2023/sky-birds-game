@@ -26,6 +26,7 @@ Player::Player(SDL_Renderer* screen) {
   _heightFrame = 0;
   _currentFrame = 0;
   _speed = 10;
+  _level = 1;
 
   LoadTexture("/player/flying.png", screen);
   SetFrameClip();
@@ -166,7 +167,7 @@ void Player::HandleAttack(SDL_Renderer *screen) {
 
   _state = ATTACKING;
   _currentFrame = 0;
-  _bullets.push_back(new Bullet(BULLET_TYPE::NORMAL, _xPos, _yPos, screen));
+  CreateBulletViaLevel(screen);
 
   SoundEffect::PlaySound(SOUND_EFFECT::ATTACK);
 }
@@ -181,5 +182,64 @@ void Player::LoadTextureViaState(SDL_Renderer *screen) {
     LoadTexture("/player/attacking.png", screen);
   } else {
     LoadTexture("/player/flying.png", screen);
+  }
+}
+
+/**
+ * Create the bullet based on the level of the player.
+ * @param SDL_Renderer* screen
+ * @return void
+ */
+void Player::CreateBulletViaLevel(SDL_Renderer *screen) {
+  if (_level > 0) {
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMAL, _xPos + _widthFrame, _yPos, 0, screen));
+  } else if (_level > 2) {
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMAL, _xPos + _widthFrame, _yPos, -1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMAL, _xPos + _widthFrame, _yPos, 0, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMAL, _xPos + _widthFrame, _yPos, 1, screen));
+  } else if (_level > 5) {
+    _bullets.push_back(new Bullet(BULLET_TYPE::MID, _xPos + _widthFrame, _yPos, -1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMAL, _xPos + _widthFrame, _yPos, 0, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::MID, _xPos + _widthFrame, _yPos, 1, screen));
+  } else if (_level > 7) {
+    _bullets.push_back(new Bullet(BULLET_TYPE::PRO, _xPos + _widthFrame, _yPos, -1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::MID, _xPos + _widthFrame, _yPos, 0, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PRO, _xPos + _widthFrame, _yPos, 1, screen));
+  } else if (_level > 10) {
+    _bullets.push_back(new Bullet(BULLET_TYPE::PRO, _xPos + _widthFrame, _yPos, -1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PROIZE, _xPos + _widthFrame, _yPos, 0, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PRO, _xPos + _widthFrame, _yPos, 1, screen));
+  } else if (_level > 13) {
+    _bullets.push_back(new Bullet(BULLET_TYPE::PRO, _xPos + _widthFrame, _yPos, -3, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMALIZE, _xPos + _widthFrame, _yPos, -1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PROIZE, _xPos + _widthFrame, _yPos, 0, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMALIZE, _xPos + _widthFrame, _yPos, 1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PRO, _xPos + _widthFrame, _yPos, 3, screen));
+  } else if (_level > 15) {
+    _bullets.push_back(new Bullet(BULLET_TYPE::PROIZE, _xPos + _widthFrame, _yPos, -3, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::MIDIZE, _xPos + _widthFrame, _yPos, -1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMALIZE, _xPos + _widthFrame, _yPos, 0, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::MIDIZE, _xPos + _widthFrame, _yPos, 1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PROIZE, _xPos + _widthFrame, _yPos, 3, screen));
+  } else if (_level > 17) {
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMALIZE, _xPos + _widthFrame, _yPos, -5, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PROIZE, _xPos + _widthFrame, _yPos, -3, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::MIDIZE, _xPos + _widthFrame, _yPos, -1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMALIZE, _xPos + _widthFrame, _yPos, 0, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::MIDIZE, _xPos + _widthFrame, _yPos, 1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PROIZE, _xPos + _widthFrame, _yPos, 3, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMALIZE, _xPos + _widthFrame, _yPos, 5, screen));
+  } else if (_level > 20) {
+    _bullets.push_back(new Bullet(BULLET_TYPE::MIDIZE, _xPos + _widthFrame, _yPos, -9, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PROIZE, _xPos + _widthFrame, _yPos, -7, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMALIZE, _xPos + _widthFrame, _yPos, -5, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PROIZE, _xPos + _widthFrame, _yPos, -3, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMALIZE, _xPos + _widthFrame, _yPos, -1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PROIZE, _xPos + _widthFrame, _yPos, 0, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMALIZE, _xPos + _widthFrame, _yPos, 1, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PROIZE, _xPos + _widthFrame, _yPos, 3, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::NORMALIZE, _xPos + _widthFrame, _yPos, 5, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::PROIZE, _xPos + _widthFrame, _yPos, 7, screen));
+    _bullets.push_back(new Bullet(BULLET_TYPE::MIDIZE, _xPos + _widthFrame, _yPos, 9, screen));
   }
 }

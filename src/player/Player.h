@@ -12,12 +12,14 @@
 class Player : public Base {
   private:
     std::vector<Base*> _bullets;
+    int _level;
 
     void HandleKeyUp(SDL_Event event);
     void HandleKeyDown(SDL_Event event, SDL_Renderer *screen);
     void HandleMove();
     void HandleAttack(SDL_Renderer *screen);
     void LoadTextureViaState(SDL_Renderer *screen);
+    void CreateBulletViaLevel(SDL_Renderer *screen);
 
   public:
     Player();

@@ -18,7 +18,7 @@ class Bullet : public Base {
 
   public:
     Bullet();
-    Bullet(BULLET_TYPE bulletType, int xPos, int yPos, SDL_Renderer *screen);
+    Bullet(BULLET_TYPE bulletType, int xPos, int yPos, int deviation, SDL_Renderer *screen);
     ~Bullet();
 
     void Render(SDL_Renderer *screen, SDL_Rect *clip = nullptr, SDL_Rect *rect = nullptr);
