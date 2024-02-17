@@ -20,6 +20,7 @@ static SDL_Event event;
 Base* loadBackground();
 bool initialize();
 void cleanup();
+void CreateAndRenderEnemies(std::vector<Enemy*> &enemies, SDL_Renderer* screen);
 
 /**
  * Main function, the entry point of the game - Sky Birds Game with SDL 2 and C++ - Study Together
@@ -36,9 +37,7 @@ int main(int argc, char* args[]) {
 
   Base* background = loadBackground();
   Player* player = new Player(screen);
-  Enemy* dark = new Dark(screen);
-  Enemy* horn = new Horn(screen);
-  Enemy* alien = new Alien(screen);
+  std::vector<Enemy*> enemies;
 
   // Main game loop
   bool quit = false;
@@ -60,9 +59,7 @@ int main(int argc, char* args[]) {
     // Draw your game elements here
     background->Render(screen);
     player->Render(screen);
-    horn->HandleRandomMove(screen);
-    dark->HandleRandomMove(screen);
-    alien->HandleRandomMove(screen);
+    CreateAndRenderEnemies(enemies, screen);
 
     // Update the screen
     SDL_RenderPresent(screen);
@@ -137,4 +134,36 @@ void cleanup() {
   SDL_DestroyRenderer(screen);
   SDL_DestroyWindow(window);
   SDL_Quit();
+}
+
+/**
+ * Create and render enemies
+ * @param enemies The enemies
+ * @param screen The screen
+ */
+void CreateAndRenderEnemies(std::vector<Enemy*> &enemies, SDL_Renderer* screen) {
+  int currentTime = SDL_GetTicks();
+
+  if (currentTime % 2000 < 20 && enemies.size() <= 10) {
+    int randomType = rand() % 4;
+
+    switch (randomType) {
+      case 0:
+        enemies.push_back(new Dark(screen));
+        break;
+      case 1:
+        enemies.push_back(new Horn(screen));
+        break;
+      case 2:
+        enemies.push_back(new Alien(screen));
+        break;
+      default:
+        enemies.push_back(new Alien(screen));
+        break;
+    }
+  }
+
+  for (auto &enemy : enemies) {
+    enemy->HandleRandomMove(screen);
+  }
 }
