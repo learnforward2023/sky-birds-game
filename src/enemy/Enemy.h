@@ -23,6 +23,7 @@ class Enemy : public Base {
     void HandleMove();
     void Render(SDL_Renderer* screen);
     void HandleRandomMove(SDL_Renderer* screen);
+    virtual void HandleAttackRandomly(SDL_Renderer* screen) {};
 };
 
 #endif //SKY_BIRDS_GAME_ENEMY_H

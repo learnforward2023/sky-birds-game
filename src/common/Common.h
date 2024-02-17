@@ -38,6 +38,12 @@ enum BULLET_TYPE {
   NORMALIZE,
   MIDIZE,
   PROIZE,
+  E_NORMAL,
+  E_MID,
+  E_PRO,
+  E_NORMALIZE,
+  E_MIDIZE,
+  E_PROIZE,
 };
 
 enum ENEMY_TYPE {

@@ -122,6 +122,7 @@ void Enemy::Render(SDL_Renderer *screen) {
 
   LoadTextureViaState(screen);
   HandleMove();
+  Bullet::RenderBullets(screen, _bullets);
 
   SDL_Rect* currentClip = &_frameClip[_currentFrame];
   SDL_Rect renderQuad = { _xPos, _yPos, _widthFrame, _heightFrame };
@@ -203,4 +204,5 @@ void Enemy::HandleRandomMove(SDL_Renderer *screen) {
   }
 
   Render(screen);
+  HandleAttackRandomly(screen);
 }

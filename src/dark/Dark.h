@@ -14,6 +14,8 @@ class Dark : public Enemy {
   public:
     Dark(SDL_Renderer *screen);
     ~Dark();
+
+    void HandleAttackRandomly(SDL_Renderer* screen);
 };
 
 #endif //SKY_BIRDS_GAME_DARK_H

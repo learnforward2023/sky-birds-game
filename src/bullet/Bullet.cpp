@@ -74,6 +74,36 @@ void Bullet::loadBulletViaType(BULLET_TYPE bulletType, SDL_Renderer * screen) {
       _rect = {0, 0, 25, 25};
       _speed = 24; _damage = 50;
       break;
+    case BULLET_TYPE::E_NORMAL:
+      LoadTexture("/bullet/e-normal.png", screen);
+      _rect = {0, 0, 27, 9};
+      _speed = -16; _damage = 20;
+      break;
+    case BULLET_TYPE::E_MID:
+      LoadTexture("/bullet/e-mid.png", screen);
+      _rect = {0, 0, 25, 14};
+      _speed = -18; _damage = 30;
+      break;
+    case BULLET_TYPE::E_PRO:
+      LoadTexture("/bullet/e-pro.png", screen);
+      _rect = {0, 0, 18, 18};
+      _speed = -20; _damage = 40;
+      break;
+    case BULLET_TYPE::E_NORMALIZE:
+      LoadTexture("/bullet/e-normalize.png", screen);
+      _rect = {0, 0, 32, 24};
+      _speed = -20; _damage = 30;
+      break;
+    case BULLET_TYPE::E_MIDIZE:
+      LoadTexture("/bullet/e-midize.png", screen);
+      _rect = {0, 0, 25, 19};
+      _speed = -22; _damage = 40;
+      break;
+    case BULLET_TYPE::E_PROIZE:
+      LoadTexture("/bullet/e-proize.png", screen);
+      _rect = {0, 0, 25, 25};
+      _speed = -24; _damage = 50;
+      break;
     default:
       break;
   }
